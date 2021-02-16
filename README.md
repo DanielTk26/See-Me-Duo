@@ -1,7 +1,7 @@
-# See Me Duo( https://danieltk26.github.io/Melodies/)</h2>
+# See Me Duo[https://danieltk26.github.io/Melodies/]</h2>
 Start a Call | Join a Call | Unlimited usage | Enjoy! |
 
-![alt text](laptop demo.png)
+![alt text](laptop-demo.png)
 <p align="center">
   <b><i>See Me Duo Demo</i></b>
 
