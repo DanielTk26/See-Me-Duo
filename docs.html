@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+  
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  
+    <link rel="stylesheet" href="css/utilities.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>See Me Duo | Docs</title>
+</head>
+<body>
+    
+    <div class="navbar">
+        <div class="container flex">
+            <h2 class="logo">Author: Daniel Thomas</h2>
+            <nav>
+
+            </nav>
+        </div>
+    </div>
+
+    
+ 
+    <section class="docs-head bg-primary py-3">
+        <div class="container grid">
+            <div>
+                <h1 class="xl">See Me Duo | Docs</h1>
+                <p class="lead">
+                  Learn how I build one
+                </p>
+            </div>
+           
+        </div>
+    </section>
+
+    
+
+    <section class="docs-main my-4">
+        <div class="container grid">
+            <div class="card bg-light p-3">
+                <h3 class="my-2">Languages</h3>
+                <nav>
+                    <ul>
+                        <li>Javascript (peer.js)</a></li>
+                        <li>HTML</a></li>
+                        <li>CSS</a></li>
+                    </ul>
+                </nav>
+
+                
+                <h3 class="my-2">Deployment</h3>
+                <nav>
+                    <ul>
+                        <li><a href="https://pages.github.com/">Github Pages</a></li>
+							<li><a href="https://www.netlify.com/">Netlify</a></li>
+							<li><a href="https://www.heroku.com/">Heroku</a></li>
+							<li><a href="https://www.hostinger.com/">Hostinger</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="card">
+
+                <a href="index.html" class="btn btn-primary">Back to Home Page</a>
+
+
+                <h2>Introduction</h2>
+                <p>See Me Duo is a simple video-call web app that works on all devices. Languages used are JavaScript(peer.js), HTML and CSS. Javascript has been used for the call room. Here javascript is used for generating a unique random Id, it is used to connect the person to the call, it is used to stream your video and audio to the other person, etc.</p>
+
+                <div class="alert alert-success">
+                    <i class="fas fa-info"></i>PeerJS simplifies peer-to-peer data, video, and audio calls.
+                </div>
+
+               
+            
+                <h3>Coding (Javascript)</h3>
+                <p>Global variables</p>
+                <pre><code>var MY_STREAM;</code></pre>
+                <pre><code>var peerList = [];</code></pre>
+             
+                <p>Accessing the required Elements</p>
+                <pre><code>const videoCallBtn = document.getElementById("videoCallBtn");</code></pre>
+                <pre><code>const localVideo = document.getElementById("localVideo");</code></pre>
+                <pre><code>const remoteVideo = document.getElementById("remoteVideo");</code></pre>
+                <pre><code>const peerId = document.getElementById("peerId");</code></pre>
+                <pre><code>const msg = document.getElementById("msg");</code></pre>
+                
+                    <p>Adding event to video call button</p>
+                <pre><code>videoCallBtn.addEventListener('click', () => {</code></pre> 
+                <pre><code>let remotePeerId = peerId.value;</code></pre>
+                <pre><code>msg.innerHTML = "Connecting to " + remotePeerId;</code></pre>
+                <pre><code>callPeer(remotePeerId);</code></pre>
+                <pre><code> });</code></pre>
+
+
+                    <p>Video Calling Function</p>
+                 <pre><code>const callPeer = (id) => {</code></pre>
+                 <pre><code>navigator.mediaDevices.getUserMedia({</code></pre>
+                 <pre><code>  video: true,</code></pre>
+                 <pre><code>  audio: {</code></pre>
+                 <pre><code>echoCancellation: true,</code></pre>
+                 <pre><code>noiseSuppression: true,</code></pre>
+                 <pre><code>  },</code></pre>
+                 <pre><code>}).then((stream) => {</code></pre>
+                 <pre><code>    MY_STREAM = stream;</code></pre>
+                 <pre><code>    addLocalVideo(stream);</code></pre>
+                 <pre><code>    let call = peer.call(id, stream);</code></pre>
+                 <pre><code>                                      </code></pre>
+                 <pre><code>call.on('stream', (remoteStream) => {</code></pre>
+                 <pre><code>       if (!peerList.includes(call.peer)) {</code></pre>
+                 <pre><code>             addRemoteVideo(remoteStream);</code></pre>
+                 <pre><code>             peerList.push(call.peer);</code></pre>
+                 <pre><code>           }</code></pre>
+                 <pre><code>       })</code></pre>
+                 <pre><code>   }).catch((err) => console.log(err));</code></pre>
+                 <pre><code>}</code></pre>
+
+                 <p>This is not the full code written for the call room but these are the main functions.</p>
+
+            </div>
+        </div>
+    </section>
+    
+
+    <footer class="footer bg-dark py-5">
+        <div class="container grid grid-3">
+            <div>
+                <h1>See Me Duo 
+                </h1>
+                <p>See Me Duo | Docs &copy; 2021</p>
+            </div>
+            <nav>
+                <ul>
+            
+                </ul>
+            </nav>
+           
+        </div>
+    </footer>
+</body>
+</html>

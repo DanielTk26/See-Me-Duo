@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+   
+ <meta charset="utf-8" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
+
+    <title>See Me</title>
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    
+    <style>
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .videoCard {
+            width: 35vw;
+            height: 50vh;
+            box-shadow: 1px 1px 10px #0004;
+            border-radius: 4%;
+            overflow: hidden;
+        }
+
+        .videoContainer {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 5vh 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h4 class="center" id="msg">See Me</h4>
+
+    <div class="videoContainer">
+        <div class="videoCard">
+            <video id="localVideo" autoplay></video>
+        </div>
+        <div class="videoCard">
+            <video id="remoteVideo" autoplay></video>
+        </div>
+    </div>
+
+    <div class="center container">
+        <div class="input-field">
+            <input id="peerId" type="text">
+            <label for="peerId">Enter Meeting Id</label>
+        </div>
+        <button id="videoCallBtn" class="btn li darken-1 waves-effect waves-light">
+           Start Call / Join the call<i class="fas fa-video right"></i>
+        </button>
+        
+    <a href="index.html"><button id="stopVideoCallBtn" class="btn orange darken-1 waves-effect waves-light">
+            Leave call<i class="fas fa-video-slash right"></i>
+        </button></a>    
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+
+    <script>
+        var MY_STREAM;
+        var peerList = [];
+        // instuctional alert
+        var inst = alert("If you want to start a call, click on Start call and share the given call Id to the desired person. Whereas If you want to join a call, type in the correct call Id and click on Join Call.")
+
+        console.log("Lets get the party started")
+
+        const videoCallBtn = document.getElementById("videoCallBtn");
+        //const stopVideoCallBtn = document.getElementById("stopVideoCallBtn");
+        const localVideo = document.getElementById("localVideo");
+        const remoteVideo = document.getElementById("remoteVideo");
+        const peerId = document.getElementById("peerId");
+        const msg = document.getElementById("msg");
+
+        var peer = new Peer();
+
+        peer.on('open', (id) => msg.innerHTML = "Share this meeting Id: " + id);
+
+        peer.on('call', (call) => {
+            navigator.mediaDevices.getUserMedia({
+                video: true,
+                audio: {
+                    echoCancellation: true,
+                    noiseSuppression: true,
+                }
+            }).then((stream) => {
+                MY_STREAM = stream;
+                addLocalVideo(stream);
+                call.answer(stream);
+                call.on('stream', (remoteStream) => {
+                    if (!peerList.includes(call.peer)) {
+                        addRemoteVideo(remoteStream);
+                        peerList.push(call.peer);
+                    }
+                })
+
+            }).catch((err) => console.log(err))
+        })
+
+        videoCallBtn.addEventListener('click', () => {
+            let remotePeerId = peerId.value;
+            callPeer(remotePeerId);
+        });
+
+        stopVideoCallBtn.addEventListener('click', () => stopVideo())
+
+        const callPeer = (id) => {
+            navigator.mediaDevices.getUserMedia({
+                video: true,
+                audio: true
+            }).then((stream) => {
+                MY_STREAM = stream;
+                addLocalVideo(stream);
+                let call = peer.call(id, stream);
+
+                call.on('stream', (remoteStream) => {
+                    if (!peerList.includes(call.peer)) {
+                        addRemoteVideo(remoteStream);
+                        peerList.push(call.peer);
+                    }
+                })
+            }).catch((err) => console.log(err));
+        }
+
+        const addRemoteVideo = (remoteStream) => remoteVideo.srcObject = remoteStream
+
+        const addLocalVideo = (localStream) => localVideo.srcObject = localStream
+
+     //   const stopVideo = () => {
+      //      const localTracks = document.querySelector("#localVideo").srcObject.getTracks();
+       //     localTracks.forEach((track) => track.stop());
+       //     const remoteTracks = document.querySelector("#remoteVideo").srcObject.getTracks();
+        //    remoteTracks.forEach((track) => track.stop());
+       // };
+    </script>
+
+</body>
+
+</html>
