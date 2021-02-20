@@ -1,5 +1,5 @@
 # [See Me Duo](https://danieltk26.github.io/See-Me-Duo/)</h2>
-Start a Call | Join a Call | Unlimited usage | Enjoy!
+Start a Call | Join a Call | Unlimited usage | Enjoy !
 
 ![alt text](https://github.com/DanielTk26/See-Me-Duo/blob/main/laptop%20demo.png)
 <p align="center">
