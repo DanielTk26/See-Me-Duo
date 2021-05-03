@@ -1,8 +1,3 @@
-/*
-=============
-Navigation
-=============
- */
 const navOpen = document.querySelector(".nav__hamburger");
 const navClose = document.querySelector(".close__toggle");
 const menu = document.querySelector(".nav__menu");
@@ -23,11 +18,7 @@ navClose.addEventListener("click", () => {
   navContainer.style.width = "0";
 });
 
-/*
-=============
-PopUp
-=============
- */
+
 const popup = document.querySelector(".popup");
 const closePopup = document.querySelector(".popup__close");
 
@@ -43,16 +34,11 @@ if (popup) {
   });
 }
 
-/*
-=============
-Fixed Navigation
-=============
- */
+
 
 const navBar = document.querySelector(".navigation");
 const gotoTop = document.querySelector(".goto-top");
 
-// Smooth Scroll
 Array.from(scrollLink).map(link => {
   link.addEventListener("click", e => {
     // Prevent Default
@@ -77,7 +63,6 @@ Array.from(scrollLink).map(link => {
   });
 });
 
-// Fix NavBar
 
 window.addEventListener("scroll", e => {
   const scrollHeight = window.pageYOffset;
