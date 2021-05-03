@@ -1,20 +1,9 @@
-/*
-=============
-Glide Js Carousel
-=============
- */
-
 const slider1 = document.getElementById("glide_1");
 const slider2 = document.getElementById("glide_2");
 const slider3 = document.getElementById("glide_3");
 const slider4 = document.getElementById("glide_4");
 const slider5 = document.getElementById("glide_5");
 
-/*
-=============
-Hero
-=============
- */
 if (slider1) {
   new Glide(slider1, {
     type: "carousel",
@@ -27,11 +16,7 @@ if (slider1) {
   }).mount();
 }
 
-/*
-=============
-Latest Products
-=============
- */
+
 
 if (slider2) {
   new Glide("#glide_2", {
@@ -52,11 +37,6 @@ if (slider2) {
   }).mount();
 }
 
-/*
-=============
-Related Products
-=============
- */
 
 if (slider3) {
   new Glide("#glide_3", {
@@ -77,8 +57,6 @@ if (slider3) {
   }).mount();
 }
 
-// Testimonial
-
 if (slider4) {
   new Glide("#glide_4", {
     type: "carousel",
@@ -90,7 +68,7 @@ if (slider4) {
   }).mount();
 }
 
-// News
+
 if (slider5) {
   new Glide("#glide_5", {
     type: "carousel",
