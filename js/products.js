@@ -80,12 +80,6 @@ const displayProductItems = items => {
   }
 };
 
-/*
-=============
-Filtering
-=============
- */
-
 const filterBtn = document.querySelectorAll(".filter-btn");
 const categoryContainer = document.getElementById("category");
 
@@ -98,13 +92,12 @@ if (categoryContainer) {
     const products = await getProducts();
 
     if (id) {
-      // remove active from buttons
+     
       Array.from(filterBtn).forEach(btn => {
         btn.classList.remove("active");
       });
       target.classList.add("active");
 
-      // Load Products
       let menuCategory = products.filter(product => {
         if (product.category === id) {
           return product;
@@ -120,11 +113,7 @@ if (categoryContainer) {
   });
 }
 
-/*
-=============
-Product Details Left
-=============
- */
+
 const pic1 = document.getElementById("pic1");
 const pic2 = document.getElementById("pic2");
 const pic3 = document.getElementById("pic3");
@@ -134,10 +123,9 @@ const picContainer = document.querySelector(".product__pictures");
 const zoom = document.getElementById("zoom");
 const pic = document.getElementById("pic");
 
-// Picture List
+
 const picList = [pic1, pic2, pic3, pic4, pic5];
 
-// Active Picture
 let picActive = 1;
 
 ["mouseover", "touchstart"].forEach(event => {
@@ -151,25 +139,20 @@ let picActive = 1;
   }
 });
 
-// change active image
 const changeImage = (imgSrc, n) => {
-  // change the main image
+
   pic.src = imgSrc;
-  // change the background-image
+
   zoom.style.backgroundImage = `url(${imgSrc})`;
-  //   remove the border from the previous active side image
+
   picList[picActive - 1].classList.remove("img-active");
-  // add to the active image
+ 
   picList[n - 1].classList.add("img-active");
-  //   update the active side picture
+
   picActive = n;
 };
 
-/*
-=============
-Product Details Bottom
-=============
- */
+
 
 const btns = document.querySelectorAll(".detail-btn");
 const detail = document.querySelector(".product-detail__bottom");
@@ -183,11 +166,11 @@ if (detail) {
     const id = target.dataset.id;
     if (id) {
       Array.from(btns).forEach(btn => {
-        // remove active from all btn
+
         btn.classList.remove("active");
         e.target.closest(".detail-btn").classList.add("active");
       });
-      // hide other active
+ 
       Array.from(contents).forEach(content => {
         content.classList.remove("active");
       });
